@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
+-->
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+         <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css" />
+    </head>
+    <body>
+        
+        <div class="container">
+            <table class="table">
+                <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Mail</th>
+                <th>Telefono</th>
+                </tr>
+                <tr th:each="empleado : ${lista}">
+                    <td th:text="${empleado.id}">ID</td>
+                    <td th:text="${empleado.name}">ID</td>
+                    <td th:text="${empleado.email}">ID</td>
+                    <td th:text="${empleado.phone}">ID</td>
+                </tr>
+                    
+            </table>
+        </div>
+    </body>
+</html>
