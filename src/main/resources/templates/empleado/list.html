@@ -13,18 +13,21 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
     <body>
         
         <div class="container">
+            <a th:href="@{/empleados/crear}">Crear</a>
             <table class="table">
                 <tr>
                 <th>Id</th>
                 <th>Nombre</th>
                 <th>Mail</th>
                 <th>Telefono</th>
+                <th>Operaciones</th>
                 </tr>
                 <tr th:each="empleado : ${lista}">
                     <td th:text="${empleado.id}">ID</td>
-                    <td th:text="${empleado.name}">ID</td>
-                    <td th:text="${empleado.email}">ID</td>
-                    <td th:text="${empleado.phone}">ID</td>
+                    <td th:text="${empleado.name}">name</td>
+                    <td th:text="${empleado.email}">mail</td>
+                    <td th:text="${empleado.phone}">phone</td>
+                    <td><a th:href="@{/empleados/editar/{id}(id=${empleado.id})}">Editar</a></td>
                 </tr>
                     
             </table>

@@ -11,7 +11,10 @@ import com.openwebinar.controladores.servicios.EmpleadoService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import com.openwebinar.controladores.modelo.Empleado;
+import javax.validation.Valid;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 
 /**
  *
@@ -33,12 +36,50 @@ public class EmpleadoController {
     @GetMapping("/empleados/crear")
     public String crear(Model model){
         model.addAttribute("empleadoForm", new Empleado());
-        return "empleado/crear";
+        return "empleado/editar";
     }
     
     @PostMapping("/empleados/crear/save")
-    public String guardar(@ModelAttribute("empleadoForm") Empleado nuevoEmpleado) {
-        empleados.add(nuevoEmpleado);
+    public String guardar(@Valid @ModelAttribute("empleadoForm") Empleado nuevoEmpleado, 
+            BindingResult bindingResult) {
+        System.out.println(bindingResult.toString());
+        
+        if(bindingResult.hasErrors()) {
+            return "empleado/editar";
+        } else {
+            empleados.add(nuevoEmpleado);
+            return "redirect:/empleados/list";
+        }
+        
+        
+    }
+    
+     @GetMapping("/empleados/editar/{id}")
+    public String editar(@PathVariable long id, Model model){
+        
+        Empleado empleado = empleados.findById(id);
+        
+        if (empleado!=null) {
+            model.addAttribute("empleadoForm", empleado);
+            return "empleado/editar";
+        } else {
+            return "redirect:empleado/crear";
+        }
+        
+        
+    }
+    
+    @PostMapping("/empleados/editar/save")
+    public String editarEmpleadoSubmit(@Valid @ModelAttribute("empleadoForm") Empleado editadoEmpleado,
+            BindingResult bindingResult) {
+        
+        if (bindingResult.hasErrors()) {
+            return "empleado/editar";
+        } else {
+            
+        empleados.edit(editadoEmpleado);
         return "redirect:/empleados/list";
+        }
+        
     }
 }

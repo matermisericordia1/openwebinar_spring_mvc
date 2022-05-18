@@ -5,16 +5,26 @@
 package com.openwebinar.controladores.modelo;
 
 import java.util.Objects;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
 
 /**
  *
  * @author rostro
  */
+
 public class Empleado {
     
+    @Min(value=0)
     private long id;
+    
+    @NotEmpty
     private String name;
+    
+    @Email
     private String email;
+    
     private String phone;
 
     public Empleado() {

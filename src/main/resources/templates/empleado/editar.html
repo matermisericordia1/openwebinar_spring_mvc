@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
+
+Para generar formularios
+https://bootsnipp.com/forms
+
+-->
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css" />
+
+    </head>
+    <body>
+        <div class="conteiner-fluid">
+
+            <form class="form-horizontal" action="#" 
+                  th:action="${empleadoForm.id != 0}?@{/empleados/editar/save} : @{/empleados/crear/save}"
+                  th:object="${empleadoForm}"
+                  method="post">
+                <fieldset>
+
+                    <!-- Form Name -->
+                    <legend th:text="${empleadoForm.id != 0}? 'Editar Empleado' : 'Nuevo Empelado'">Crear</legend>
+
+                    
+                    <div class="form-group"
+                         th:classappend="${#fields.hasErrors('id')} ? 'has-error'">
+                        <label class="col-md-4 control-label" for="id">ID</label>  
+                        <div class="col-md-4">
+                            <input id="id" name="id" 
+                                   th:field="*{id}"
+                                   th:attrappend="readonly=${empleadoForm.id != 0} ? 'readonly': null"
+                                   type="text" placeholder="id" class="form-control input-md">
+                            <span th:if="${#fields.hasErrors('id')}"
+                                  th:errors="*{id}"
+                                class="help-block" id="id-errors">Errores</span>  
+                                </div>
+                    </div>
+
+                    <!-- Text input-->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="textinput">Nombre</label>  
+                        <div class="col-md-4">
+                            <input id="name" name="name" th:field="*{name}" type="text" placeholder="name" class="form-control input-md">
+                            <span class="help-block">introduce el nombre</span>  
+                        </div>
+                    </div>
+
+                    <!-- Text input-->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="email">Email</label>  
+                        <div class="col-md-4">
+                            <input id="email" name="email" th:field="*{email}" type="text" placeholder="mail" class="form-control input-md">
+                            <span class="help-block">asdfasdf@asd.com</span>  
+                        </div>
+                    </div>
+
+                    <!-- Text input-->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="phone">Telefono</label>  
+                        <div class="col-md-4">
+                            <input id="phone" name="phone" th:field="*{phone}" type="text" placeholder="Phone" class="form-control input-md">
+                            <span class="help-block">12345</span>  
+                        </div>
+                    </div>
+                    
+                    <input type="submit">
+
+                </fieldset>
+            </form>
+
+        </div>
+    </body>
+</html>
